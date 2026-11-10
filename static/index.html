@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EnergyTool — консультант</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body>
+<aside class="sidebar">
+  <a class="brand" href="/" aria-label="EnergyTool — главная"><span class="brand-mark">мтс</span><span>EnergyTool<span class="brand-sub">ЭНЕРГИЯ ПОД КОНТРОЛЕМ</span></span></a>
+  <div class="side-label">РАБОЧЕЕ ПРОСТРАНСТВО</div>
+  <button class="nav active" id="chat-tab"><span>◌</span> Консультант</button>
+  <button class="nav" id="review-tab"><span>▤</span> Проверка диалогов</button>
+  <div class="side-note"><span class="small-dot"></span> От задачи — к решению<p>Разберёмся в потреблении, учёте и возможностях вашего объекта.</p></div>
+  <div class="sidebar-bottom"><span class="pill">HACK&amp;CHANGE 2026</span><p>Демонстрационный прототип.<br>Только тестовые контактные данные.</p></div>
+</aside>
+<main>
+  <header><div class="breadcrumbs">EnergyTool <span>/</span> <span id="page-title">Консультант</span></div><span class="status" id="mode">Подключение…</span></header>
+  <section id="chat-view">
+    <div class="workspace-heading"><div><div class="eyebrow">ВАШ ЭНЕРГЕТИЧЕСКИЙ КОНСУЛЬТАНТ</div><h1>Начнём с вашей задачи<span>.</span></h1><p>Понятные ответы о решениях для бизнеса — на основе базы знаний МТС.</p></div><button id="new-chat" class="secondary">＋ Новый диалог</button></div>
+    <div id="preview-notice" class="notice" hidden>API модели не подключён. Сейчас доступен поиск по базе знаний: ответы показывают исходные фрагменты, а не консультацию LLM.</div>
+    <div class="chat-layout">
+      <div class="chat-card">
+        <div class="chat-card-header"><div class="avatar">E</div><div><strong>EnergyTool</strong><small>Помогаем выбрать следующий шаг</small></div><button id="header-lead" class="secondary">Заявка ↗</button><button id="close-chat" class="icon-button" aria-label="Закрыть диалог">×</button></div>
+        <div class="messages" id="messages" role="log" aria-live="polite" aria-label="Сообщения диалога">
+          <div class="welcome" id="welcome"><div class="welcome-icon">↗</div><h2>Как сделать энергию<br>эффективнее?</h2><p>Расскажите о вашем объекте и о том, что хотите изменить. Или выберите тему ниже.</p><div class="suggestions">
+            <button data-prompt="У нас выросли счета за электроэнергию. С чего начать, чтобы снизить затраты?"><span>↘</span><strong>Снизить расходы</strong><small>Тарифы и потребление</small></button>
+            <button data-prompt="Хотим автоматизировать сбор показаний по нескольким объектам. Что нужно для начала?"><span>▥</span><strong>Наладить учёт</strong><small>Приборы и аналитика</small></button>
+            <button data-prompt="Хотим установить солнечную станцию на предприятии. Как понять, подойдёт ли она нам?"><span>☀</span><strong>Солнечная энергия</strong><small>Генерация для бизнеса</small></button>
+            <button data-prompt="Мы электросетевая компания, хотим находить коммерческие потери. Какие данные понадобятся?"><span>⌕</span><strong>Найти потери</strong><small>Приоритеты проверок</small></button>
+          </div></div>
+        </div>
+        <div id="chat-error" class="error" role="alert" hidden></div>
+        <form id="chat-form" class="composer"><label class="sr-only" for="message">Ваш вопрос</label><textarea id="message" maxlength="8000" rows="2" placeholder="Например: у нас три склада, хотим видеть расход по каждому…" required></textarea><button id="send" type="submit" aria-label="Отправить сообщение">↑</button></form>
+        <div class="composer-footer">Enter — отправить · Shift + Enter — новая строка<span>Ответы могут требовать уточнения специалистом</span></div>
+      </div>
+      <aside class="context-panel"><div class="context-icon">✳</div><h2>Решение начинается<br>с деталей</h2><p>Тип объекта, регион, потребление и ваша цель помогут сделать разговор полезнее.</p><div class="divider"></div><div class="step"><span>01</span><div><strong>Опишите задачу</strong><p>Без специальных терминов</p></div></div><div class="step"><span>02</span><div><strong>Уточним важное</strong><p>Подберём направление</p></div></div><div class="step"><span>03</span><div><strong>Перейдём к расчёту</strong><p>Со специалистом, если нужно</p></div></div><button id="open-lead" class="secondary wide">Оставить тестовую заявку ↗</button><small>Точная стоимость и эффект определяются после изучения объекта.</small><button id="reopen" class="primary wide" hidden>Открыть новый диалог</button></aside>
+    </div>
+  </section>
+  <section id="review-view" hidden><div class="workspace-heading"><div><div class="eyebrow">КОНТРОЛЬ КАЧЕСТВА</div><h1>Диалоги и заявки<span>.</span></h1><p>История сохраняется независимо от того, оставил ли посетитель заявку.</p></div></div><form id="review-login" class="review-login"><label for="review-key">Ключ проверяющего</label><input id="review-key" type="password" autocomplete="off" placeholder="Из runtime/reviewer-token.txt" required><button class="primary">Открыть историю</button></form><div id="review-error" class="error" role="alert" hidden></div><div class="review-layout"><div id="session-list"></div><div id="review-detail"><p class="muted">Выберите диалог для просмотра ответов, источников и времени обработки.</p></div></div></section>
+  <footer>МТС EnergyTool <span>Консультация · Учёт · Эффективность</span></footer>
+</main>
+<dialog id="lead-dialog"><form id="lead-form"><div class="dialog-title"><h2>Следующий шаг — вместе</h2><button type="button" id="cancel-lead" class="icon-button" aria-label="Закрыть форму">×</button></div><p>Создадим заявку внутри прототипа. Она не отправляется в МТС. Используйте выдуманные данные.</p><label>ФИО<input name="name" autocomplete="off" maxlength="200" placeholder="Иван Тестовый" required minlength="2"></label><label>Телефон<input name="phone" type="tel" autocomplete="off" maxlength="30" placeholder="+7 000 000-00-00" required></label><label>Компания<input name="company" autocomplete="off" maxlength="200" placeholder="ООО «Тестовый объект»" required minlength="2"></label><label class="checkbox"><input name="test_data_confirmed" type="checkbox" required> Подтверждаю: все данные вымышленные</label><div id="lead-error" class="error" role="alert" hidden></div><button class="primary wide" id="save-lead">Создать тестовую заявку</button></form></dialog>
+</body></html>

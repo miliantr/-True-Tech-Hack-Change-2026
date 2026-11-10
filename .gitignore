@@ -1,0 +1,12 @@
+.env
+runtime/
+__pycache__/
+*.pyc
+.venv/
+Данные/
+Данные-*.zip
+МТС*.pdf
+submission.csv
+submission.tmp
+dist/
+test-results/

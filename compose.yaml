@@ -1,0 +1,31 @@
+services:
+  energytool:
+    build: .
+    ports:
+      - "127.0.0.1:${HOST_PORT:-8000}:8000"
+    environment:
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_MODEL: ${LLM_MODEL:-}
+      REVIEW_TOKEN: ${REVIEW_TOKEN:-}
+      RETRIEVAL_MODE: ${RETRIEVAL_MODE:-lexical}
+      EMB_MODEL: ${EMB_MODEL:-baai/bge-m3}
+      USE_RERANKER: ${USE_RERANKER:-0}
+      RERANKER_MODEL: ${RERANKER_MODEL:-qwen/qwen3-reranker-8b}
+      TOP_K: ${TOP_K:-16}
+      RERANKER_TOP_N: ${RERANKER_TOP_N:-6}
+      MAX_TOKENS: ${MAX_TOKENS:-2048}
+      TEMPERATURE: ${TEMPERATURE:-0}
+      MAX_WORKERS: ${MAX_WORKERS:-3}
+      API_TIMEOUT: ${API_TIMEOUT:-45}
+      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-http://localhost:${HOST_PORT:-8000}}
+    volumes:
+      - history:/app/runtime
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/status', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+volumes:
+  history:

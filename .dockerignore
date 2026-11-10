@@ -1,0 +1,12 @@
+*
+!Dockerfile
+!app.py
+!config.py
+!consultant.py
+!retrieval.py
+!api_client.py
+!storage.py
+!static/
+!static/**
+!Данные/
+!Данные/knowledge-base.zip
